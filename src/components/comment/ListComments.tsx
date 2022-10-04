@@ -24,7 +24,9 @@ const CommentActions = ({
   replyCount: number;
 }) => {
   const [replying, setReplying] = useState(false);
+  // This renders the total replies number and a reply button which hides if you're replying already
 
+  // If you are replying, it adds a text field underneath it to add the reply
   return (
     <>
       <Group position='apart' mt='md'>
@@ -38,6 +40,7 @@ const CommentActions = ({
 };
 
 const Comment = ({comment}: {comment: CommentWithChildren}) => {
+  // The comment component is relatively simple, it just displays the image, name, comment text etc
   return (
     <Paper withBorder radius='md' mb='md' p='md'>
       <Box
@@ -65,6 +68,7 @@ const Comment = ({comment}: {comment: CommentWithChildren}) => {
         replyCount={comment.children.length}
       />
 
+{/* This is th emain part, for each child, if any, of this comment we return yet another list comments component so we are recursively rendering the children */}
       {comment.children && comment.children.length > 0 && (
         <ListComments comments={comment.children} />
       )}
@@ -73,6 +77,7 @@ const Comment = ({comment}: {comment: CommentWithChildren}) => {
 };
 
 const ListComments = ({comments}: {comments: CommentWithChildren[]}) => {
+  // The base comment list, this maps through each 'root' comments and returns a comment component for each
   return (
     <Box>
       {comments.map(comment => {
